@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export const Navbar = () => {
   return (
     <nav className="navbar orange navbar-expand-lg navbar-light bg-light fixed-top">
@@ -170,7 +171,12 @@ export const List = () => {
   return (
     <div className="col-sm">
       <div className="row">
-        {/* card */}
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
       </div>
     </div>
   );

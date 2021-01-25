@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
-import { Navbar } from "./components";
+import { Navbar, List } from "./components";
 import "./styles/App.css";
+
 
 const SideMenu = () => {
   const links = ["Légumes", "Fruits", "Produits Frais", "Epicerie", "Boissons"];
@@ -22,7 +23,11 @@ const App = () => {
       <div className="container">
         <div className="row">
           <SideMenu />
-          <div className="col-sm">Store</div>
+          <div className="col-sm">
+            <div className="row">
+              <List />
+            </div>
+          </div>
         </div>
       </div>
     </Fragment>
