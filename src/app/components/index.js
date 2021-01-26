@@ -1,6 +1,5 @@
 import React from "react";
 
-
 export const Navbar = () => {
   return (
     <nav className="navbar orange navbar-expand-lg navbar-light bg-light fixed-top">
@@ -16,7 +15,7 @@ export const Navbar = () => {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-      <span className="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -27,12 +26,11 @@ export const Navbar = () => {
                 className="form-control mr-sm-2"
                 type="search"
                 placeholder="Search"
-                aria-label="Search"/>
+                aria-label="Search"
+              />
             </form>
           </div>
-          <div className="menu-right">
-            {/* cart */}
-          </div>
+          <div className="menu-right">{/* cart */}</div>
         </div>
       </div>
     </nav>
@@ -49,24 +47,25 @@ export const Footer = () => {
   );
 };
 
-export const Card = () => {
+export const Card = (props) => {
+  const { fruit } = props;
   return (
     <div className="col-sm-4">
       <div className="card">
         <img
           width="170"
           height="170"
-          src={process.env.PUBLIC_URL + `/assets/0/citron.png`}
-          alt="citron"
+          src={process.env.PUBLIC_URL + `/assets/${fruit.category}/${fruit.image}`}
+          alt={fruit.name}
         />
         <div className="card-body">
           <div className="row">
             <div className="col-sm-6">
-              <h4>Citron</h4>
+              <h4>{fruit.name}</h4>
             </div>
             <div className="col-sm-6">
               <p>
-                €2.99/unit
+                €{fruit.price}/{fruit.unit}
               </p>
               <button className="btn btn-warning btn-sm">view product</button>
             </div>
@@ -77,7 +76,6 @@ export const Card = () => {
     </div>
   );
 };
-
 
 export const Modal = () => {
   return (
@@ -93,7 +91,9 @@ export const Modal = () => {
       <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Citrons</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Citrons
+            </h5>
             <button
               type="button"
               class="close"
@@ -109,10 +109,7 @@ export const Modal = () => {
                 <img
                   width="170"
                   height="170"
-                  src={
-                    process.env.PUBLIC_URL +
-                    `/assets/0/citron.png`
-                  }
+                  src={process.env.PUBLIC_URL + `/assets/0/citron.png`}
                   alt="Citron"
                 />
               </div>
@@ -128,15 +125,11 @@ export const Modal = () => {
                   role="group"
                   aria-label="Basic example"
                 >
-                  <button
-                    type="button"
-                    className="btn btn-secondary">
+                  <button type="button" className="btn btn-secondary">
                     -
                   </button>
                   <span className="btn btn-light qty">1</span>
-                  <button
-                    type="button"
-                    className="btn btn-secondary">
+                  <button type="button" className="btn btn-secondary">
                     +
                   </button>
                 </div>
@@ -149,14 +142,11 @@ export const Modal = () => {
             <button
               type="button"
               class="btn btn-secondary"
-              data-dismiss="modal">
-              Close
-            </button>
-            <button
-              type="button"
-              class="btn btn-success"
               data-dismiss="modal"
             >
+              Close
+            </button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">
               Add to Cart
             </button>
           </div>
@@ -166,17 +156,17 @@ export const Modal = () => {
   );
 };
 
+export const List = (props) => {
+  const { data } = props;
+  const fruits = data[0];
 
-export const List = () => {
+  console.log(fruits);
   return (
     <div className="col-sm">
       <div className="row">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {fruits.map((fruit) => (
+          <Card fruit={fruit} />
+        ))}
       </div>
     </div>
   );

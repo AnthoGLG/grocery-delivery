@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Navbar, List } from "./components";
 import "./styles/App.css";
+import { list } from './data'
 
 
 const SideMenu = () => {
@@ -25,7 +26,7 @@ const App = () => {
           <SideMenu />
           <div className="col-sm">
             <div className="row">
-              <List />
+              <List data={list}/>
             </div>
           </div>
         </div>
