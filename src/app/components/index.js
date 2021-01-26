@@ -55,7 +55,9 @@ export const Card = (props) => {
         <img
           width="170"
           height="170"
-          src={process.env.PUBLIC_URL + `/assets/${fruit.category}/${fruit.image}`}
+          src={
+            process.env.PUBLIC_URL + `/assets/${fruit.category}/${fruit.image}`
+          }
           alt={fruit.name}
         />
         <div className="card-body">
@@ -165,7 +167,7 @@ export const List = (props) => {
     <div className="col-sm">
       <div className="row">
         {fruits.map((fruit) => (
-          <Card fruit={fruit} />
+          <Card key={fruit.ref} fruit={fruit} />
         ))}
       </div>
     </div>
