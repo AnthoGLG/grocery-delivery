@@ -1,19 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Navbar, List } from "./components";
 import "./styles/App.css";
-import { list } from './data'
+import { list } from "./data";
 
-
-const SideMenu = () => {
+const SideMenu = ({ loadCategory }) => {
   const links = ["Légumes", "Fruits", "Produits Frais", "Epicerie", "Boissons"];
-  const loadCategory = i => {
-    console.log(i);
-  }
+
   return (
     <div className="col-sm-2 sidebar">
       <ul>
         {links.map((link, index) => {
-          return <li key={index} onClick={() => loadCategory(index)}>{link}</li>;
+          return (
+            <li key={index} onClick={() => loadCategory(index)}>
+              {link}
+            </li>
+          );
         })}
       </ul>
     </div>
@@ -21,15 +22,20 @@ const SideMenu = () => {
 };
 
 const App = () => {
+  const [category, setCategory] = useState(0);
+  const loadCategory = (i) => {
+    setCategory(i);
+  };
+
   return (
     <Fragment>
       <Navbar />
       <div className="container">
         <div className="row">
-          <SideMenu />
+          <SideMenu loadCategory={loadCategory} />
           <div className="col-sm">
             <div className="row">
-              <List data={list}/>
+              <List data={list} category={category} />
             </div>
           </div>
         </div>
