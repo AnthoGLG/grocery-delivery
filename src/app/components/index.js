@@ -48,7 +48,7 @@ export const Footer = () => {
 };
 
 export const Card = (props) => {
-  const { fruit } = props;
+  const { item } = props;
   return (
     <div className="col-sm-4">
       <div className="card">
@@ -56,18 +56,18 @@ export const Card = (props) => {
           width="170"
           height="170"
           src={
-            process.env.PUBLIC_URL + `/assets/${fruit.category}/${fruit.image}`
+            process.env.PUBLIC_URL + `/assets/${item.category}/${item.image}`
           }
-          alt={fruit.name}
+          alt={item.name}
         />
         <div className="card-body">
           <div className="row">
             <div className="col-sm-6">
-              <h4>{fruit.name}</h4>
+              <h4>{item.name}</h4>
             </div>
             <div className="col-sm-6">
               <p>
-                €{fruit.price}/{fruit.unit}
+                €{item.price}/{item.unit}
               </p>
               <button className="btn btn-warning btn-sm">view product</button>
             </div>
@@ -160,12 +160,12 @@ export const Modal = () => {
 
 export const List = (props) => {
   const { data, category } = props;
-  const grocery = data[category];
+  
   return (
     <div className="col-sm">
       <div className="row">
-        {grocery.map((fruit) => (
-          <Card key={fruit.ref} fruit={fruit} />
+        {data.map(item => (
+          <Card key={item.ref} item={item} />
         ))}
       </div>
     </div>
