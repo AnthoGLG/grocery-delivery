@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Navbar = ({ filter, setFiltering }) => {
   return (
@@ -90,6 +90,7 @@ export const Card = (props) => {
 };
 
 export const Modal = ({ item }) => {
+  const [count, setCount] = useState(1);
   return (
     <div
       class="modal fade "
@@ -143,11 +144,19 @@ export const Modal = ({ item }) => {
                   role="group"
                   aria-label="Basic example"
                 >
-                  <button type="button" className="btn btn-secondary">
+                  <button 
+                    onClick={() => setCount(count > 1 ? count - 1 : 1)}
+                    type="button" 
+                    className="btn btn-secondary"
+                  >
                     -
                   </button>
-                  <span className="btn btn-light qty">1</span>
-                  <button type="button" className="btn btn-secondary">
+                    <span className="btn btn-light qty">{count}</span>
+                  <button
+                    onClick={() => setCount(count + 1)}
+                    type="button"
+                    className="btn btn-secondary"
+                  >
                     +
                   </button>
                 </div>
