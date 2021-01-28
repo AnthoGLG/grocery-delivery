@@ -28,8 +28,8 @@ export const Navbar = ({ filter, setFiltering }) => {
                 placeholder="Search"
                 aria-label="Search"
                 onChange={(e) => {
-                  setFiltering(e.target.value.length > 0)
-                  filter(e.target.value)
+                  setFiltering(e.target.value.length > 0);
+                  filter(e.target.value);
                 }}
               />
             </form>
@@ -73,21 +73,27 @@ export const Card = (props) => {
               <p>
                 €{item.price}/{item.unit}
               </p>
-              <button className="btn btn-warning btn-sm">view product</button>
+              <button
+                className="btn btn-warning btn-sm"
+                data-toggle="modal"
+                data-target={`#${item.ref}`}
+              >
+                view product
+              </button>
             </div>
           </div>
         </div>
       </div>
-      {/* modal */}
+      <Modal item={item} />
     </div>
   );
 };
 
-export const Modal = () => {
+export const Modal = ({ item }) => {
   return (
     <div
       class="modal fade "
-      id=""
+      id={item.ref}
       data-backdrop="static"
       tabindex="-1"
       role="dialog"
@@ -98,7 +104,7 @@ export const Modal = () => {
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">
-              Citrons
+              {item.name}
             </h5>
             <button
               type="button"
@@ -115,7 +121,10 @@ export const Modal = () => {
                 <img
                   width="170"
                   height="170"
-                  src={process.env.PUBLIC_URL + `/assets/0/citron.png`}
+                  src={
+                    process.env.PUBLIC_URL +
+                    `/assets/${item.category}/${item.image}`
+                  }
                   alt="Citron"
                 />
               </div>
@@ -125,7 +134,10 @@ export const Modal = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore
                 </p>
-                <h3 className="price">€1.99</h3> <br />
+                <h3 className="price">
+                  {item.price}/${item.unit}
+                </h3>{" "}
+                <br />
                 <div
                   className="btn-group"
                   role="group"
@@ -164,11 +176,11 @@ export const Modal = () => {
 
 export const List = (props) => {
   const { data, category } = props;
-  
+
   return (
     <div className="col-sm">
       <div className="row">
-        {data.map(item => (
+        {data.map((item) => (
           <Card key={item.ref} item={item} />
         ))}
       </div>
