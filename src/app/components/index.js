@@ -34,7 +34,10 @@ export const Navbar = ({ filter, setFiltering }) => {
               />
             </form>
           </div>
-          <div className="menu-right">{/* cart */}</div>
+          <div className="menu-right">
+            <i class="fas fa-shopping-bag fa-2x"></i>
+            <span class="badge badge-pill badge-success">1</span>
+          </div>
         </div>
       </div>
     </nav>
