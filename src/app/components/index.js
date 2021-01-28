@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Navbar = ({ filter, setFiltering }) => {
+export const Navbar = ({ filter, setFiltering, count }) => {
   return (
     <nav className="navbar orange navbar-expand-lg navbar-light bg-light fixed-top">
       <a href="" className="navbar-brand crimson">
@@ -36,7 +36,7 @@ export const Navbar = ({ filter, setFiltering }) => {
           </div>
           <div className="menu-right">
             <i class="fas fa-shopping-bag fa-2x"></i>
-            <span class="badge badge-pill badge-success">1</span>
+            <span class="badge badge-pill badge-success">{count}</span>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ export const Footer = () => {
 };
 
 export const Card = (props) => {
-  const { item } = props;
+  const { item, addToCart, count } = props;
   return (
     <div className="col-sm-4">
       <div className="card">
@@ -87,13 +87,13 @@ export const Card = (props) => {
           </div>
         </div>
       </div>
-      <Modal item={item} />
+      <Modal item={item} addToCart={addToCart} count={count} />
     </div>
   );
 };
 
-export const Modal = ({ item }) => {
-  const [count, setCount] = useState(1);
+export const Modal = ({ item, addToCart, count }) => {
+  const [qty, setQty] = useState(1);
   return (
     <div
       class="modal fade "
@@ -147,16 +147,16 @@ export const Modal = ({ item }) => {
                   role="group"
                   aria-label="Basic example"
                 >
-                  <button 
-                    onClick={() => setCount(count > 1 ? count - 1 : 1)}
-                    type="button" 
+                  <button
+                    onClick={() => setQty(count > 1 ? count - 1 : 1)}
+                    type="button"
                     className="btn btn-secondary"
                   >
                     -
                   </button>
-                    <span className="btn btn-light qty">{count}</span>
+                  <span className="btn btn-light qty">{qty}</span>
                   <button
-                    onClick={() => setCount(count + 1)}
+                    onClick={() => setQty(count + 1)}
                     type="button"
                     className="btn btn-secondary"
                   >
@@ -176,7 +176,12 @@ export const Modal = ({ item }) => {
             >
               Close
             </button>
-            <button type="button" class="btn btn-success" data-dismiss="modal">
+            <button
+              type="button"
+              class="btn btn-success"
+              data-dismiss="modal"
+              onClick={() => addToCart(count + 1)}
+            >
               Add to Cart
             </button>
           </div>
@@ -187,13 +192,18 @@ export const Modal = ({ item }) => {
 };
 
 export const List = (props) => {
-  const { data, category } = props;
+  const { data, category, addToCart, count } = props;
 
   return (
     <div className="col-sm">
       <div className="row">
         {data.map((item) => (
-          <Card key={item.ref} item={item} />
+          <Card
+            key={item.ref}
+            item={item}
+            addToCart={addToCart}
+            count={count}
+          />
         ))}
       </div>
     </div>

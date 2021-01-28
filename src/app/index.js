@@ -12,7 +12,7 @@ const SideMenu = ({ loadCategory, category }) => {
         {links.map((link, index) => {
           return (
             <li
-              className={ category === index && 'active'}
+              className={category === index && "active"}
               key={index}
               onClick={() => loadCategory(index)}
             >
@@ -29,31 +29,40 @@ const App = () => {
   const [category, setCategory] = useState(0);
   const [isFiltering, setFiltering] = useState(false);
   const [filtered, setFiltered] = useState(false);
+  const [count, setCount] = useState(1);
   const loadCategory = (i) => {
     setCategory(i);
   };
-  const filterResults = input => {
-    let fullList = list.flat()
-    let results = fullList.filter(item => {
-      const name = item.name.toLowerCase()
-      const term = input.toLowerCase()
-      return name.indexOf(term) > -1
-    })
-    setFiltered(results)
-  } 
+  const filterResults = (input) => {
+    let fullList = list.flat();
+    let results = fullList.filter((item) => {
+      const name = item.name.toLowerCase();
+      const term = input.toLowerCase();
+      return name.indexOf(term) > -1;
+    });
+    setFiltered(results);
+  };
   useEffect(() => {
-    console.log(isFiltering)
-
-  })
+    console.log(isFiltering);
+  });
   return (
     <Fragment>
-      <Navbar filter={filterResults} setFiltering={setFiltering}/>
+      <Navbar
+        filter={filterResults}
+        setFiltering={setFiltering}
+        count={count}
+      />
       <div className="container">
         <div className="row">
-          <SideMenu loadCategory={loadCategory} category={category}/>
+          <SideMenu loadCategory={loadCategory} category={category} />
           <div className="col-sm">
             <div className="row">
-              <List data={isFiltering ? filtered : list[category]} category={category} />
+              <List
+                data={isFiltering ? filtered : list[category]}
+                category={category}
+                addToCart={setCount}
+                count={count}
+              />
             </div>
           </div>
         </div>
