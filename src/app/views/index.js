@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Navbar, List } from "./components";
-import "./styles/App.css";
-import { list } from "./data";
+import { Navbar, List } from "../components";
+import "../styles/App.css";
+import { list } from "../data";
 
 const SideMenu = ({ loadCategory, category }) => {
   const links = ["Fruits", "Légumes", "Produits Frais", "Epicerie", "Boissons"];
