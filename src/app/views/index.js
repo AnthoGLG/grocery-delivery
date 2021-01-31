@@ -1,29 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Navbar, List } from "../components";
+import { Navbar } from "../components";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Cart } from "./Cart";
+import { Home } from "./Home";
 import "../styles/App.css";
 import { list } from "../data";
-
-const SideMenu = ({ loadCategory, category }) => {
-  const links = ["Fruits", "Légumes", "Produits Frais", "Epicerie", "Boissons"];
-
-  return (
-    <div className="col-sm-2 sidebar">
-      <ul>
-        {links.map((link, index) => {
-          return (
-            <li
-              className={category === index && "active"}
-              key={index}
-              onClick={() => loadCategory(index)}
-            >
-              {link}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-};
 
 const App = () => {
   const [category, setCategory] = useState(0);
@@ -47,26 +28,31 @@ const App = () => {
   });
   return (
     <Fragment>
-      <Navbar
-        filter={filterResults}
-        setFiltering={setFiltering}
-        count={count}
-      />
-      <div className="container">
-        <div className="row">
-          <SideMenu loadCategory={loadCategory} category={category} />
-          <div className="col-sm">
-            <div className="row">
-              <List
-                data={isFiltering ? filtered : list[category]}
-                category={category}
-                addToCart={setCount}
-                count={count}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Router>
+        <Navbar
+          filter={filterResults}
+          setFiltering={setFiltering}
+          count={count}
+        />
+
+        {/* Routes */}
+        <Route
+          exact
+          path="/"
+          component={() => (
+            <Home
+              category={category}
+              loadCategory={loadCategory}
+              addToCart={setCount}
+              count={count}
+              list={list}
+              isFiltering={isFiltering}
+              filtered={filtered}
+            />
+          )}
+        />
+        <Route path="/cart" component={Cart} />
+      </Router>
     </Fragment>
   );
 };
