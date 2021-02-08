@@ -154,7 +154,7 @@ export const Modal = ({ item, addToCart, count }) => {
                   aria-label="Basic example"
                 >
                   <button
-                    onClick={() => setQty(count > 1 ? count - 1 : 1)}
+                    onClick={() => setQty(qty > 1 ? qty - 1 : 1)}
                     type="button"
                     className="btn btn-secondary"
                   >
@@ -162,7 +162,7 @@ export const Modal = ({ item, addToCart, count }) => {
                   </button>
                   <span className="btn btn-light qty">{qty}</span>
                   <button
-                    onClick={() => setQty(count + 1)}
+                    onClick={() => setQty(qty + 1)}
                     type="button"
                     className="btn btn-secondary"
                   >
@@ -186,7 +186,7 @@ export const Modal = ({ item, addToCart, count }) => {
               type="button"
               class="btn btn-success"
               data-dismiss="modal"
-              onClick={() => addToCart(count + 1)}
+              onClick={() => addToCart(item, qty)}
             >
               Add to Cart
             </button>
@@ -198,7 +198,7 @@ export const Modal = ({ item, addToCart, count }) => {
 };
 
 export const List = (props) => {
-  const { data, category, addToCart, count } = props;
+  const { data, category, addToCart, updateCart } = props;
 
   return (
     <div className="col-sm">
@@ -208,7 +208,7 @@ export const List = (props) => {
             key={item.ref}
             item={item}
             addToCart={addToCart}
-            count={count}
+            updateCart={updateCart}
           />
         ))}
       </div>

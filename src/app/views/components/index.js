@@ -5,9 +5,10 @@ import { CartPage } from "./Cart";
 import { Home } from "./Home";
 import "../../styles/App.css";
 import { list } from "../../data";
+import { updateCart } from './../../lib/actions';
 
 const App = props => {
-  const { items } = props
+  const { items, onAddToCart, onUpdateCart } = props
   const [category, setCategory] = useState(0);
   const [isFiltering, setFiltering] = useState(false);
   const [filtered, setFiltered] = useState(false);
@@ -27,6 +28,15 @@ const App = props => {
   useEffect(() => {
     console.log(isFiltering);
   });
+
+  const add = (item, quantity) => {
+    onAddToCart(item, quantity)
+  }
+
+  const update = () => {
+
+  }
+
   return (
     <Fragment>
       <Router>
@@ -44,8 +54,8 @@ const App = props => {
             <Home
               category={category}
               loadCategory={loadCategory}
-              addToCart={setCount}
-              count={count}
+              addToCart={add}
+              updateCart={update}
               list={list}
               isFiltering={isFiltering}
               filtered={filtered}
