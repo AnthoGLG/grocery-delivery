@@ -3,36 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../../styles/App.css";
 
-const Row = () => {
-  const items = useSelector(state => state.items)
-  useEffect(() => {
-    console.log(`You have ${items.length} in your cart`)
-  })
-
+const Row = ( props ) => {
+  const { quantity, details } = props.item
   return (
     <tr>
       <td>
         <img
           width="70"
           height="70"
-          src={process.env.PUBLIC_URL + `/assets/0/citron.png`}
-          alt="citrons"
+          src={process.env.PUBLIC_URL + `/assets/${details.category}/${details.image}`}
+          alt={details.name}
         />
       </td>
-      <td>ref</td>
-      <td>€0.00</td>
+      <td>{details.ref}</td>
+      <td>€{details.price}</td>
       <td>
         <div className="btn-group" role="group" aria-label="Basic example">
           <button type="button" className="btn btn-secondary">
             -
           </button>
-          <span className="btn btn-light">1</span>
+          <span className="btn btn-light">{quantity}</span>
           <button type="button" className="btn btn-secondary">
             +
           </button>
         </div>
       </td>
-      <td>€2.99</td>
+      <td>€{(quantity * details.price).toFixed(2)}</td>
       <td>
         <button type="button" className="btn btn-danger remove">
           X
@@ -43,6 +39,10 @@ const Row = () => {
 };
 
 const Table = () => {
+  const items = useSelector(state => state.items)
+  useEffect(() => {
+    console.log(`You have ${items.length} in your cart`)
+  })
   return (
     <table>
       <tr>
@@ -52,8 +52,9 @@ const Table = () => {
         <th width="150">Quantity</th>
         <th width="200">Total</th>
       </tr>
-      <Row />
-      <Row />
+      {items.map(item => {
+        return(<Row item={item}/>)
+      })}
     </table>
   );
 };
