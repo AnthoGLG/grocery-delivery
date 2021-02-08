@@ -25,7 +25,7 @@ const SideMenu = ({ loadCategory, category }) => {
   };
 
 export const Home = props => {
-  const {isFiltering, filtered, list, category, loadCategory, addToCart, updateCart} = props
+  const {isFiltering, filtered, list, category, loadCategory, updateCart} = props
   return (<div className="container">
   <div className="row">
     <SideMenu loadCategory={loadCategory} category={category} />
@@ -34,7 +34,6 @@ export const Home = props => {
         <List
           data={isFiltering ? filtered : list[category]}
           category={category}
-          addToCart={addToCart}
           updateCart={updateCart}
         />
       </div>
