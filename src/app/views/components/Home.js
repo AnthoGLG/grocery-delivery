@@ -1,5 +1,5 @@
 import React from "react";
-import { List } from "../components";
+import { List } from "../../components";
 
 const SideMenu = ({ loadCategory, category }) => {
     const links = ["Fruits", "Légumes", "Produits Frais", "Epicerie", "Boissons"];

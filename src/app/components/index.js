@@ -39,11 +39,10 @@ export const Navbar = ({ filter, setFiltering, count }) => {
           </div>
           <div className="menu-right">
             <Link to="/cart">
-              <i class="fas fa-shopping-bag fa-2x grey"></i>
+                <i class="fas fa-shopping-bag fa-2x grey"></i>
               <span class="badge badge-pill badge-success">{count}</span>
             </Link>
-            
-            <span class="badge badge-pill badge-success">{count}</span>
+              <span class="badge badge-pill badge-success">{count}</span>
           </div>
         </div>
       </div>
